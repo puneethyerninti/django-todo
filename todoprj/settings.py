@@ -126,3 +126,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
 
+# Temporary admin auto-creation (remove after first login)
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+if not User.objects.filter(username="admin").exists():
+    User.objects.create_superuser("admin", "admin@example.com", "adminpass")
